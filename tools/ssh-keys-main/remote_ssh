@@ -1,0 +1,11 @@
+IPLIST="10.10.20.41 10.10.20.42 10.10.20.43"
+for ip in ${IPLIST} ;do
+USER=$(whoami)
+/usr/bin/expect <<EOF
+        spawn ssh ${USER}@${ip} date
+        expect {
+                "*yes/no*" { send "yes\r";exp_continue}
+                "*password*" { send "redhat\r"; exp_continue}
+        }
+EOF
+done

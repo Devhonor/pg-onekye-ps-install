@@ -1,0 +1,52 @@
+#Print relative infomation
+#Normal output 
+
+function print_log(){
+    sep=""
+    showtime=$(date "+%F %p %T")
+    #echo -e "[${showtime}] $*" | tee -a ${INSTALL_LOG}
+    printf "[%s]\\033[1;33m %s %s \\033[0;39m\n" "${showtime}" "${sep}" "$*"| tee -a ${SUCCESS_LOG}
+}
+
+
+#Executing successfully output
+function print_success_log(){
+    showtime=$(date "+%F %p %T")
+    sep=" "
+    #echo -e "[${showtime}]\\033[1;33m $* \\033[0;39m" | tee -a ${SUCCESS_LOG}
+    printf "[%s]\\033[1;36m %6s %s \\033[0;39m\n" "${showtime}" "${sep}" "$*"| tee -a ${SUCCESS_LOG}
+}
+
+#Show notice output
+
+function print_show_log(){
+    showtime=$(date "+%F %p %T")
+    echo -e "[${showtime}]\\033[0;34m $* \\033[0;39m" | tee -a ${INSTALL_LOG}
+}
+
+
+#Execution failed output
+
+function print_sub_log(){
+    showtime=$(date "+%F %p %T")
+    sep=" "
+    #echo -e "[${showtime}]\\033[1;36m $* \\033[0;39m" | tee -a ${INSTALL_LOG}
+    printf "[%s]\\033[1;36m %6s %s\\033[0;39m\n" "${showtime}" "${sep}" "$*"| tee -a ${SUCCESS_LOG}
+}
+#Help
+function print_help_log(){
+    echo -e "\\033[1;36m $*\\033[0;39m" | tee -a ${INSTALL_LOG}
+}
+
+function print_error_log(){
+    showtime=$(date "+%F %p %T")
+    sep=" "
+    #echo -e "[${showtime}]\\033[2;31m $* \\033[0;39m" | tee -a ${ERROR_LOG}
+    printf "[%s]\\033[2;31m %6s %s \\033[0;39m\n" "${showtime}" "${sep}" "$*"| tee -a ${SUCCESS_LOG}
+}
+
+function print_warning_log(){
+    showtime=$(date "+%F %p %T")
+    #echo -e "[${showtime}]\\033[2;31m $* \\033[0;39m" | tee -a ${ERROR_LOG}
+    printf "[%s]\\033[1;31m %6s %s \\033[0;39m\n" "${showtime}" "${sep}" "$*"| tee -a ${SUCCESS_LOG}
+}

@@ -1,0 +1,6 @@
+. ${TOPLEVEL_DIR}/conf/log.cfg
+. ${TOPLEVEL_DIR}/lib/funclib
+. ${TOPLEVEL_DIR}/conf/env.cnf
+. ${TOPLEVEL_DIR}/exec/oscheck.sh
+. ${TOPLEVEL_DIR}/exec/dbinstall.sh
+. ${TOPLEVEL_DIR}/exec/printHelp.sh

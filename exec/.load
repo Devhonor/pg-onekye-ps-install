@@ -1,0 +1,12 @@
+config_autossh
+config_target_env
+config_run_osuser_autossh
+config_firewalld
+config_selinux
+config_kernel_limit
+config_deps_pkg
+checking_rep_env
+restart_source
+prepare_soft_pkg
+deploy_standby
+verify_standby_status
