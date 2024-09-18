@@ -26,7 +26,7 @@ function checking_rep_env(){
         print_sub_log "Current wal level is ${WAL_LEVEL}"
     else
         print_error_log "Current wal_level is ${WAL_LEVEL},Please guaranting wal_level is replica or logical"
-        su - ${INSTALL_USER} -c "psql -U ${SUPERADMIN} -d postgres -p ${SOURCE_PGPORT} -Atq -c 'ALTER SYSTEM SET wal_level = replica'" >>${ERROR_LOG} 2>&1 >>${SUCCESS_LOG}
+         ${SOURCE_PG_HOME}/bin/psql -U ${SUPERADMIN} -d postgres -p ${SOURCE_PGPORT} -Atq -c "ALTER SYSTEM SET wal_level = 'replica'" >>${ERROR_LOG} 2>&1 >>${SUCCESS_LOG}
     fi
     print_sub_log "Setting listener addresses"
     ${SOURCE_PG_HOME}/bin/psql -U ${SUPERADMIN} -d postgres -p ${SOURCE_PGPORT} -Atq -c "ALTER SYSTEM SET listen_addresses = '*' "
@@ -95,5 +95,5 @@ function verify_standby_status(){
         REPL_STATUS=$(${SOURCE_PG_HOME}/bin/psql -U ${SUPERADMIN} -d postgres -p ${SOURCE_PGPORT} -Atq -c "select sync_state from pg_stat_replication where client_addr='${target_ip}'") >>${ERROR_LOG} 2>&1 >>${SUCCESS_LOG}
         print_sub_log "standby host ${target_ip} state is normal:${REPL_STATUS}"
     done
-    print_log "13.Verify sync state end"
+    print_log "   Verify sync state end"
 }
